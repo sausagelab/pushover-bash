@@ -5,8 +5,8 @@ today=$(date --date="1 day ago" +%d-%m-%Y)
 cars=colt
 
 function push(){
-    curl -s -F "token=<>" \
-    -F "user=<> \
+    curl -s -F "token=<>" \ #### add your app token ####
+    -F "user=<> \ #### add your pushover user token ####
     -F "title=Pickapart Cars in stock!" \
     -F "priority=1" \
     -F "message=$1" https://api.pushover.net/1/messages.json
