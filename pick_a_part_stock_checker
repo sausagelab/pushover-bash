@@ -1,0 +1,19 @@
+#!/bin/bash
+
+today=$(date --date="1 day ago" +%d-%m-%Y)
+
+cars=colt
+
+function push(){
+    curl -s -F "token=<>" \
+    -F "user=<> \
+    -F "title=Pickapart Cars in stock!" \
+    -F "priority=1" \
+    -F "message=$1" https://api.pushover.net/1/messages.json
+}
+
+function pap_stock(){
+lynx -dump http://pap.pickapart.co.nz/stock_iframe.asp?yid=4 | egrep -i $cars | sed -e 's/   //g' -e 's/ -//g' -e 's/ /_/g' | grep $today
+}
+
+push $(pap_stock) > /dev/null 2>&1
